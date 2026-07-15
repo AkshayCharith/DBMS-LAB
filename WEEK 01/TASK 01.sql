@@ -15,7 +15,43 @@ INSERT INTO Taxpayer VALUES
 							 (104,"DEFGH1234I","Sneha Patel","1998-08-05","Teacher",620000.00,"sneha.patel@example.com",TRUE),
 							 (105,"EFGHJ1234J","Kiran Rao","1990-01-18","FreeLancer",875000.00,"kiran.rao@example.com",TRUE),
 							 (106,"FGHJK1234K","Meera Singh","1985-12-30","Consultant",1500000.00,"meera.singh@example.com",FALSE);
+
+SET SQL_SAFE_UPDATES=0;
+INSERT INTO Taxpayer
+VALUES (107,"GHIJK7890M","Sylveon","1996-03-25","ML Engineer",1800000.00,"sylveon@example.com",TRUE);
+
+UPDATE Taxpayer 
+SET Annual_Income = 950000.00
+WHERE FullName = "Ravi Kumar" ;
+
+UPDATE Taxpayer
+SET Occupation = "Software Consultant"
+WHERE FullName = "Kiran rao";
+
+UPDATE Taxpayer
+SET  Is_active = TRUE 
+WHERE FullName = "Meera Singh";
+
+DELETE FROM Taxpayer
+WHERE Taxpayer_Id = 107;
+
+ALTER TABLE Taxpayer
+ADD COLUMN Phone_Number INT NOT NULL;
+
+ALTER TABLE Taxpayer
+MODIFY Occupation VARCHAR(100);
+
+INSERT INTO Taxpayer
+VALUES (101,"GHIJ7890M","Sylveon","1996-03-25","ML Engineer",1800000.00,"sylveon@example.com",TRUE);
+/*Error Code: 1062. Duplicate entry '101' for key 'tax_payer_Id.PRIMARY'	0.000 sec*/
+INSERT INTO Taxpayer
+VALUES (107,"ABCDE1234F","Pikatchu","1999-04-14","DS Engineer",100000.00,"pikatchu@example.com",TRUE);
+INSERT INTO Taxpayer
+VALUES (110,"BASJ7890M","Infernape","1986-03-25","Engineer",1700000.00,"infernape@example.com",TRUE);
 SELECT *FROM Taxpayer;
+
+
+
 
 
 CREATE TABLE INCOME_CATEGORY(Category_ID INT PRIMARY KEY,
@@ -30,7 +66,8 @@ INSERT INTO INCOME_CATEGORY VALUES
 									 (5,"Other Resources","Income such as bank interest.",TRUE),
 									 (6,"Agricultural Income","Income from eligible agricultural activities.",FALSE);
 SELECT *FROM INCOME_CATEGORY;
-                            
+INSERT INTO INCOME_CATEGORY
+VALUES (7,"Rental Income","Income is generating through rental.",TRUE);
                             
 CREATE TABLE FINANCIAL_YEAR(Year_Id INT PRIMARY KEY,
 							Year_Label VARCHAR(9) NOT NULL UNIQUE,
@@ -56,7 +93,8 @@ CREATE TABLE INCOME_RECORD(Income_Id INT PRIMARY KEY,
                             Recieve_Date DATE NOT NULL,
                             Financial_Year VARCHAR(9) NOT NULL);
                             
-ALTER TABLE INCOME_RECORD ADD CONSTRAINT fk_taxpayer
+ALTER TABLE INCOME_RECORD 
+ADD CONSTRAINT fk_taxpayer
 FOREIGN KEY (Taxpayer_Id) REFERENCES Taxpayer(Taxpayer_Id);
 
 						
@@ -67,6 +105,27 @@ INSERT INTO INCOME_RECORD VALUES
 								 (1004,104,"Sunrise School","Salary",620000.00,"2026-03-31","2025-2026"),
 								 (1005,105,"Web Design Projects","Business",750000.00,"2026-03-31","2025-2026"),
 								 (1006,106,"Professional Consultating","Business",1500000.00,"2026-03-31","2025-2026");
+ALTER TABLE INCOME_RECORD
+ADD COLUMN Remarks INT NOT NULL;
+
 SELECT *FROM INCOME_RECORD;
-SELECT *FROM INCOME_RECORD WHERE Taxpayer_Id >103;
-SELECT *FROM Taxpayer ORDER BY FullName ASC;
+
+
+CREATE TABLE Tax_Office  (Office_Id INT PRIMARY KEY,
+						  Office_Name VARCHAR(50) NOT NULL,
+                          City VARCHAR(100) NOT NULL);
+INSERT INTO Tax_Office VALUES
+(111,"Microsoft","Washington"),
+(222,"Meta","California");
+
+TRUNCATE TABLE Tax_Office;
+DROP TABLE Tax_Office;
+SELECT *FROM Tax_Office;
+
+
+
+
+
+
+
+
