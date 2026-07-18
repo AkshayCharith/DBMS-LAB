@@ -43,7 +43,7 @@ MODIFY Occupation VARCHAR(100);
 
 INSERT INTO Taxpayer
 VALUES (101,"GHIJ7890M","Sylveon","1996-03-25","ML Engineer",1800000.00,"sylveon@example.com",TRUE);
-/*Error Code: 1062. Duplicate entry '101' for key 'tax_payer_Id.PRIMARY'	0.000 sec*/
+/*Error Code: 1136. Column count doesn't match value count at row 1	0.000 sec
 INSERT INTO Taxpayer
 VALUES (107,"ABCDE1234F","Pikatchu","1999-04-14","DS Engineer",100000.00,"pikatchu@example.com",TRUE);
 INSERT INTO Taxpayer
