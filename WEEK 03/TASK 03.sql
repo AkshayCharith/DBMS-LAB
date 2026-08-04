@@ -109,7 +109,10 @@ FROM Taxpayer;
 SELECT Annual_Income*1.10
 FROM Taxpayer;
 
-
+ALTER TABLE Taxpayer
+MODIFY COLUMN Annual_Income INT;
+ALTER TABLE Taxpayer
+MODIFY COLUMN Taxpayer_Id CHAR;
 
 
 
